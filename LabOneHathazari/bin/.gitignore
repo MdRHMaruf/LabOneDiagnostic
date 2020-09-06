@@ -1,5 +1,4 @@
-/Thumbs.db
-/com/
-/loginlogo.jpg
-/rptlogo.jpg
-/surgiscope.jpg
+/*.bak
+/*.sql
+/LabOneHathazari/*.jar
+/db_coonection.java
