@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.100000000000004"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="234"/>
+	<property name="ireport.y" value="198"/>
 	<parameter name="doctorl1" class="java.lang.String"/>
 	<parameter name="doctorl2" class="java.lang.String"/>
 	<parameter name="doctorl3" class="java.lang.String"/>
@@ -453,31 +453,13 @@
 		</band>
 	</pageFooter>
 	<summary>
-		<band height="46" splitType="Stretch">
+		<band height="19" splitType="Stretch">
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement x="10" y="1" width="541" height="26"/>
+				<reportElement x="10" y="1" width="541" height="16"/>
 				<textElement>
 					<font fontName="Calibri" size="9"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{Note}.replace( '#', '\n' ).trim()]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement x="11" y="27" width="54" height="15">
-					<printWhenExpression><![CDATA[$F{Comment}.length()>0 ? true:false]]></printWhenExpression>
-				</reportElement>
-				<textElement>
-					<font size="10" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Comment :]]></text>
-			</staticText>
-			<textField>
-				<reportElement x="69" y="27" width="482" height="15">
-					<printWhenExpression><![CDATA[$F{Comment}.length()>0 ? true:false]]></printWhenExpression>
-				</reportElement>
-				<textElement>
-					<font size="10"/>
-				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{Comment}]]></textFieldExpression>
 			</textField>
 		</band>
 	</summary>

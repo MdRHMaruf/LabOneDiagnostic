@@ -484,7 +484,7 @@
 	<summary>
 		<band height="75" splitType="Stretch">
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement x="7" y="0" width="541" height="42"/>
+				<reportElement x="7" y="0" width="541" height="15"/>
 				<textElement>
 					<font fontName="Calibri" size="9"/>
 				</textElement>

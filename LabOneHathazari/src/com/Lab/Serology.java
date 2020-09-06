@@ -154,6 +154,7 @@ public class Serology extends JPanel{
 	public void loadComment(){
 		try {
 			cmbComment.v.clear();
+			cmbComment.v.add("");
 			ResultSet rs=db.sta.executeQuery("select Note from TbTestWiseNote  where TestHeadId='3' order by Note");
 			while(rs.next()){
 				cmbComment.v.add(rs.getString("Note"));

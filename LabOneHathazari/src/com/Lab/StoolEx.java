@@ -164,6 +164,7 @@ public class StoolEx extends JPanel{
 		btnActionEvent();
 		btnRefreshEvent();
 		background();
+		loadComment();
 	}
 	public void background(){
 		try {                
@@ -1478,6 +1479,20 @@ public class StoolEx extends JPanel{
 			while(rs.next()){
 				cmbDoctorName1.v.add(rs.getString("Name")+rs.getString("Degree"));
 				cmbDoctorName2.v.add(rs.getString("Name")+rs.getString("Degree"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Error!!,"+e.getMessage());
+		}
+	}
+	
+	public void loadComment(){
+		try {
+			cmbComment.v.clear();
+			ResultSet rs=db.sta.executeQuery("select Note from TbTestWiseNote  where TestHeadId='8' order by Note");
+			cmbComment.v.add("");
+			while(rs.next()){
+				cmbComment.v.add(rs.getString("Note"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -167,6 +167,7 @@ public class BioChemestry extends JPanel{
 		try {
 			cmbComment.v.clear();
 			ResultSet rs=db.sta.executeQuery("select Note from TbTestWiseNote  where TestHeadId='2' order by Note");
+			cmbComment.v.add("");
 			while(rs.next()){
 				cmbComment.v.add(rs.getString("Note"));
 			}

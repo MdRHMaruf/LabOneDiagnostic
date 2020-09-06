@@ -151,6 +151,7 @@ public class Immunology extends JPanel{
 		try {
 			cmbComment.v.clear();
 			ResultSet rs=db.sta.executeQuery("select Note from TbTestWiseNote  where TestHeadId='9' order by Note");
+			cmbComment.v.add("");
 			while(rs.next()){
 				cmbComment.v.add(rs.getString("Note"));
 			}
@@ -797,7 +798,7 @@ public class Immunology extends JPanel{
 				}
 				
 				if(btnSingleTest.isSelected()){
-					map.put("Comment",cmbComment.txtMrNo.getText().trim());
+					map.put("Note",cmbComment.txtMrNo.getText().trim());
 					String input ="NewFormetReport/ImmunologyWithOutGroup.jrxml";
 					//input=btnSingleTest.isSelected()?"NewFormetReport/BioChemistry3ColWithOutGroup.jrxml":btnGroupTest.isSelected()?"NewFormetReport/BioChemistry3ColWithGroup.jrxml":"NewFormetReport/BioChemistry3ColWithOutGroupDiabetes.jrxml";
 					JasperReport com=JasperCompileManager.compileReport(input);
@@ -807,7 +808,7 @@ public class Immunology extends JPanel{
 					list.clear();
 				}
 				else if(btnGroupTest.isSelected()){
-					map.put("Comment",cmbComment.txtMrNo.getText().trim());
+					map.put("Note",cmbComment.txtMrNo.getText().trim());
 					String input ="NewFormetReport/ImmunologyWithGroup.jrxml";
 					//input=btnSingleTest.isSelected()?"NewFormetReport/BioChemistry3ColWithOutGroup.jrxml":btnGroupTest.isSelected()?"NewFormetReport/BioChemistry3ColWithGroup.jrxml":"NewFormetReport/BioChemistry3ColWithOutGroupDiabetes.jrxml";
 					JasperReport com=JasperCompileManager.compileReport(input);
@@ -877,7 +878,7 @@ public class Immunology extends JPanel{
 				map.put("PatientSample",txtPatientSampleCount.getText().trim());
 				map.put("Impression",txtImpression.getText().trim());
 				map.put("TestList",testList);
-				map.put("Comment",cmbComment.txtMrNo.getText().trim());
+				map.put("Note",cmbComment.txtMrNo.getText().trim());
 
 				String input = "NewFormetReport/ImmunologyConfirmatoryReport.jrxml";
 				list.add(map);

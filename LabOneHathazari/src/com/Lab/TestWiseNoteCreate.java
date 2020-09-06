@@ -50,7 +50,7 @@ import com.ShareClass.db_coonection;
 public class TestWiseNoteCreate extends JPanel{
 	db_coonection db=new db_coonection();
 	SessionBeam sessionBeam;
-	
+
 	JPanel mainPanel=new JPanel();
 	JPanel westPanel=new JPanel();
 	JPanel westNorthPanel=new JPanel();
@@ -64,13 +64,13 @@ public class TestWiseNoteCreate extends JPanel{
 	JPanel eastSouthPanel=new JPanel();
 	JButton btnSubmit=new JButton("Submit",new ImageIcon("icon/save.png"));
 	JButton btnView=new JButton("View",new ImageIcon("icon/Preview.png"));
-	
+
 	JLabel lblTestName=new JLabel("Test Name");	
 	JLabel lblNote=new JLabel("Note");	
 	JTextField txtNote=new JTextField(28);
 	SuggestText cmbTestName=new SuggestText();
 
-	
+
 	String TestCol[]={"S/N","Test Name","Note","Edit","DEL"};
 	Object TestRow[][]={};
 	DefaultTableModel TestModel=new DefaultTableModel(TestRow,TestCol);
@@ -95,7 +95,7 @@ public class TestWiseNoteCreate extends JPanel{
 		} 
 	};
 	JScrollPane TestScroll=new JScrollPane(Testtable,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-	
+
 	String startDate="",autoSn="",parentId="",testautoid="",ledgerId="";
 	int addRow=0,select=0;;
 	BufferedImage image;
@@ -132,14 +132,14 @@ public class TestWiseNoteCreate extends JPanel{
 
 
 		btnSubmit.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				btnSubmitEvent();
 			}
 		});
 		btnView.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
@@ -163,23 +163,28 @@ public class TestWiseNoteCreate extends JPanel{
 	}
 	private void btnSubmitEvent() {
 		if(!cmbTestName.txtMrNo.getText().toString().isEmpty()){
-			if(!CheckDoplicateTestName())
-			{
+			if(!txtNote.getText().toString().isEmpty()){
+				if(isTestNameExist())
+				{
 					try {
-							String AutoId=GetComissionAutoId();
-							String TestId=getTestId();
-							String TestHeadId=getTestHeadId();
-							String sql="insert into TbTestWiseNote (AutoId,TestId,TestHeadId,Note,EntryTime,CreateBy) values ('"+AutoId+"','"+TestId+"','"+TestHeadId+"','"+txtNote.getText().trim().toString()+"',CURRENT_TIMESTAMP,'"+sessionBeam.getUserId()+"')";
-							db.sta.executeUpdate(sql);
-							ShowTestNote();
+						String AutoId=GetComissionAutoId();
+						String TestId=getTestId();
+						String TestHeadId=getTestHeadId();
+						String sql="insert into TbTestWiseNote (AutoId,TestId,TestHeadId,Note,EntryTime,CreateBy) values ('"+AutoId+"','"+TestId+"','"+TestHeadId+"','"+txtNote.getText().trim().toString()+"',CURRENT_TIMESTAMP,'"+sessionBeam.getUserId()+"')";
+						db.sta.executeUpdate(sql);
+						ShowTestNote();
 
 					} catch (Exception e) {
 						e.printStackTrace();
 						JOptionPane.showMessageDialog(null, "Error!!,"+e.getMessage());
 					}
+				}
+				else{
+					JOptionPane.showMessageDialog(null, "Your Test Name is Not Exist....Please Select Valid Test Name....");
+				}
 			}
 			else{
-				JOptionPane.showMessageDialog(null, "Already set Note");
+				JOptionPane.showMessageDialog(null, "Warning!!,Please Provide Test Note");
 			}
 		}
 		else{
@@ -196,7 +201,7 @@ public class TestWiseNoteCreate extends JPanel{
 			while(rs.next()){
 				TestModel.addRow(new Object[]{rs.getString("AutoId"),rs.getString("TestName"),rs.getString("Note"),new ImageIcon("icon/edt.png"),new ImageIcon("icon/delete.png")});
 			}
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			JOptionPane.showMessageDialog(null, "Error,"+e);
@@ -215,9 +220,9 @@ public class TestWiseNoteCreate extends JPanel{
 			JOptionPane.showMessageDialog(null, "Error"+e);
 		}
 	}
-	public boolean CheckDoplicateTestName(){
+	public boolean isTestNameExist(){
 		try {
-			ResultSet rs=db.sta.executeQuery("select TestId from TbTestWiseNote where TestId=(select SN from TbTestName where TestName='"+cmbTestName.txtMrNo.getText().trim().toString()+"') ");
+			ResultSet rs=db.sta.executeQuery("select * from tbtestname where testname='"+cmbTestName.txtMrNo.getText().trim().toString()+"' ");
 			while(rs.next()){
 				return true;
 			}
@@ -301,7 +306,7 @@ public class TestWiseNoteCreate extends JPanel{
 		eastPanel.add(eastCenterPanel, BorderLayout.CENTER);
 		eastCenterPanel.setOpaque(false);
 		eastCenterPanel_work();
-/*		eastPanel.add(eastSouthPanel, BorderLayout.SOUTH);
+		/*		eastPanel.add(eastSouthPanel, BorderLayout.SOUTH);
 		eastSouthPanel.setOpaque(false);
 		eastSouthPanel_work();*/
 	}
@@ -314,19 +319,19 @@ public class TestWiseNoteCreate extends JPanel{
 		eastNorthPanel.add(lblTestName);
 		eastNorthPanel.add(cmbTestName.combo);
 		cmbTestName.combo.setPreferredSize(new Dimension(260, 30));
-		
+
 		eastNorthPanel.add(btnView);
 		btnView.setPreferredSize(new Dimension(85, 34));
 		btnView.setMnemonic(KeyEvent.VK_V);
-		
+
 		eastNorthPanel.add(lblNote);
 		eastNorthPanel.add(txtNote);
 		txtNote.setPreferredSize(new Dimension(130, 30));
-	
+
 		eastNorthPanel.add(btnSubmit);
 		btnSubmit.setPreferredSize(new Dimension(100, 36));
 		btnSubmit.setMnemonic(KeyEvent.VK_S);
-		
+
 		final Component ob[] = {cmbTestName.txtMrNo,txtNote,btnSubmit};	
 		new FocusMoveByEnter(ob);
 	}
@@ -357,7 +362,7 @@ public class TestWiseNoteCreate extends JPanel{
 				try {
 					int confrim =JOptionPane.showConfirmDialog(null	,"Are You Sure To Update Test Note", "Confrim........", JOptionPane.YES_NO_OPTION);
 					if(confrim==JOptionPane.YES_OPTION){
-						
+
 						String insertSql="insert into TbUdTestWiseNote select *from TbTestWiseNote where AutoId='"+Testtable.getValueAt(Testtable.getSelectedRow(), 0)+"'";
 						db.sta.executeUpdate(insertSql);
 						String sql="update TbTestWiseNote set Note='"+Testtable.getValueAt(Testtable.getSelectedRow(), 2)+"',entryTime=CURRENT_TIMESTAMP,createBy='"+sessionBeam.getUserId()+"'  where AutoId='"+Testtable.getValueAt(Testtable.getSelectedRow(), 0)+"'";

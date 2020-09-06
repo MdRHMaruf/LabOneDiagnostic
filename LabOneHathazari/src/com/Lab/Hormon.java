@@ -155,6 +155,7 @@ public class Hormon extends JPanel{
 		try {
 			cmbComment.v.clear();
 			ResultSet rs=db.sta.executeQuery("select Note from TbTestWiseNote  where TestHeadId='4' order by Note");
+			cmbComment.v.add("");
 			while(rs.next()){
 				cmbComment.v.add(rs.getString("Note"));
 			}
@@ -295,10 +296,7 @@ public class Hormon extends JPanel{
 
 				}
 			}
-			ResultSet rs2=db.sta.executeQuery("select Note from TbTestWiseNote where TestId=(select SN from tbtestname where TestName='"+TestName+"')");
-			while(rs2.next()){
-				cmbComment.txtMrNo.setText(rs2.getString("Note"));
-			}
+			
 			//loadResultRow();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -380,10 +378,10 @@ public class Hormon extends JPanel{
 			}
 
 			count=table.getRowCount();
-			ResultSet rs2=db.sta.executeQuery("select Note from TbTestWiseNote where TestId=(select SN from tbtestname where TestName='"+TestName+"')");
+			/*ResultSet rs2=db.sta.executeQuery("select Note from TbTestWiseNote where TestId=(select SN from tbtestname where TestName='"+TestName+"')");
 			while(rs2.next()){
 				cmbComment.txtMrNo.setText(rs2.getString("Note"));
-			}
+			}*/
 			
 			//this code for confimatory result load
 			String sql="select * from tblabreportvalue where FiscalYear='"+FiscalYear+"' and CMonth='"+BillMonth+"' and labBillId='"+labId+"' and labPid=4 and testCode between 125 and 127 and rId between 125 and 127";
@@ -481,10 +479,10 @@ public class Hormon extends JPanel{
 			count=table.getRowCount();
 			//System.out.println("count "+count);
 
-			ResultSet rs2=db.sta.executeQuery("select Note from TbTestWiseNote where TestId=(select SN from tbtestname where TestName='"+TestName+"')");
+			/*ResultSet rs2=db.sta.executeQuery("select Note from TbTestWiseNote where TestId=(select SN from tbtestname where TestName='"+TestName+"')");
 			while(rs2.next()){
 				cmbComment.txtMrNo.setText(rs2.getString("Note"));
-			}
+			}*/
 			
 			//Confirmatory Result Load
 			String sql="select * from tblabreportvalue where FiscalYear='"+FiscalYear+"' and CMonth='"+BillMonth+"' and labBillId='"+labId+"' and labPid=4 and testCode between 125 and 127 and rId between 125 and 127";
@@ -633,6 +631,8 @@ public class Hormon extends JPanel{
 					map.put("doctorl7",rs.getString("line7"));
 					map.put("doctorl8",rs.getString("line8"));
 				}
+				
+				map.put("Note",cmbComment.txtMrNo.getText().trim());
 				
 				if(btnSingleTest.isSelected()){
 					String input ="NewFormetReport/HormoneWithOutGroup.jrxml";

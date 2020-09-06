@@ -227,7 +227,7 @@ public class Haematology extends JPanel{
 		textFoucAndEnter();
 		updatePerticulerName();
 		background();
-		loadComment();
+		loadComment("0");
 	}
 	public void background(){
 		try {                
@@ -687,6 +687,7 @@ public class Haematology extends JPanel{
 		txtRatio.setText("");
 		txtIndex.setText("");
 		txtINR.setText("");
+		loadComment("0");
 /*		txtbt.setText("");
 		txtOhters2.setText("");
 		txtcell1.setText("");
@@ -1903,13 +1904,22 @@ public class Haematology extends JPanel{
 			}
 		});
 	}
-	public void loadComment(){
+	public void loadComment(String testId){
 		try {
 			cmbAdvice.v.clear();
-			ResultSet rs=db.sta.executeQuery("select Note from TbTestWiseNote  where TestHeadId='1' order by Note");
-			while(rs.next()){
-				cmbAdvice.v.add(rs.getString("Note"));
+			cmbAdvice.v.add("");
+			if(testId.equals("0")) {
+				ResultSet rs=db.sta.executeQuery("select Note from TbTestWiseNote  where TestHeadId='1' order by Note");
+				while(rs.next()){
+					cmbAdvice.v.add(rs.getString("Note"));
+				}
+			}else {
+				ResultSet rs=db.sta.executeQuery("select Note from TbTestWiseNote  where testId='"+testId+"' order by Note");
+				while(rs.next()){
+					cmbAdvice.v.add(rs.getString("Note"));
+				}
 			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			JOptionPane.showMessageDialog(null, "Error!!,"+e.getMessage());
