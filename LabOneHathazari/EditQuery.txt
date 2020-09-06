@@ -1,0 +1,13 @@
+select * from tbdoctorinfo where DoctorCode='DC-914'
+
+select * from TbLabPatient where RefferBy='DC-1461'
+select * from TbBillHistory where RefferId='1461'
+select * from TbFinalPerticularBillHistory where Doct orId='1461'
+select * from TbPatientInfo where RefferBy='1461'
+
+update TbLabPatient set RefferBy='DC-5' where RefferBy='DC-90'
+update TbBillHistory set RefferId='5' where RefferId='90'
+update TbFinalPerticularBillHistory set DoctorId='5'  where DoctorId='90'
+update TbPatientInfo set RefferBy='5' where RefferBy='90'
+
+delete from tbdoctorinfo where DoctorCode='DC-90'

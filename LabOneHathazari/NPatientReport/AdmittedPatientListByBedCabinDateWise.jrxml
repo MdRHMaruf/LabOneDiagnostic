@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="TotalPatientPositionTodays" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.464100000000001"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="sql" class="java.lang.String">
+		<defaultValueExpression><![CDATA["select admissionDate,PatientName,CONCAT(RegNo,'/',YEAR(admissionDate)) as RegNoYear,Cabin,FatherName,HusbandName,(select Name from tbdoctorinfo where autoId=RefferBy) as RefferDoctor,(select Degree from tbdoctorinfo where autoId=RefferBy) as RefferDegree,'2017-08-10' as StartDate,'2017-08-12' as EndDate from TbPatientInfo where  admissionDate between '2017-08-10'  and '2017-08-12' "]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[$P!{sql}]]>
+	</queryString>
+	<field name="admissionDate" class="java.util.Date"/>
+	<field name="PatientName" class="java.lang.String"/>
+	<field name="RegNoYear" class="java.lang.String"/>
+	<field name="Cabin" class="java.lang.String"/>
+	<field name="FatherName" class="java.lang.String"/>
+	<field name="HusbandName" class="java.lang.String"/>
+	<field name="RefferDoctor" class="java.lang.String"/>
+	<field name="RefferDegree" class="java.lang.String"/>
+	<field name="StartDate" class="java.util.Date"/>
+	<field name="EndDate" class="java.util.Date"/>
+	<variable name="CareOf" class="java.lang.String">
+		<variableExpression><![CDATA[( $F{HusbandName}.equals("") ? $F{FatherName} : $F{HusbandName} )]]></variableExpression>
+	</variable>
+	<variable name="FullDName" class="java.lang.String">
+		<variableExpression><![CDATA[$F{RefferDoctor}==null?"":$F{RefferDoctor}+" "+($F{RefferDegree}==null?"":$F{RefferDegree})]]></variableExpression>
+	</variable>
+	<group name="BedCabin">
+		<groupExpression><![CDATA[$F{Cabin}]]></groupExpression>
+		<groupHeader>
+			<band height="18">
+				<textField>
+					<reportElement mode="Opaque" x="3" y="3" width="146" height="14" backcolor="#CCCCCC"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["Seat : "+$F{Cabin}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="2" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="80" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="188" y="54" width="179" height="14" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center">
+					<font isBold="true" isItalic="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Admitted Patient List By Bed/Cabin]]></text>
+			</staticText>
+			<textField pattern="MM/dd/yyyy">
+				<reportElement x="505" y="64" width="69" height="14"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{EndDate}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="372" y="63" width="73" height="14"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Statement For]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="492" y="63" width="13" height="14"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[To]]></text>
+			</staticText>
+			<textField pattern="MM/dd/yyyy">
+				<reportElement x="441" y="64" width="51" height="14"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{StartDate}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="10" y="36" width="552" height="13"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[2555101-5]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="23" width="553" height="13"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[445/466 Katalgonj,Chawkbazar]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="10" width="552" height="14"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SURGISCOPE HOSPITAL LTD. (Unit-2)]]></text>
+			</staticText>
+			<image>
+				<reportElement x="43" y="18" width="50" height="50"/>
+				<imageExpression class="java.lang.String"><![CDATA["src\\rptlogo.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="17" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="0" width="555" height="1"/>
+			</line>
+			<line>
+				<reportElement x="0" y="16" width="555" height="1"/>
+			</line>
+			<staticText>
+				<reportElement x="5" y="1" width="49" height="15"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="54" y="1" width="162" height="15"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Patient Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="214" y="1" width="71" height="15"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Reg.No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="285" y="1" width="95" height="15"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Care Of]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="380" y="1" width="175" height="15"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Doctor Name]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="-1" width="555" height="1"/>
+			</line>
+			<line>
+				<reportElement x="0" y="15" width="555" height="1"/>
+			</line>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="4" y="0" width="50" height="14"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{admissionDate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="54" y="0" width="162" height="14"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{PatientName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="214" y="0" width="71" height="14"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{RegNoYear}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="285" y="0" width="95" height="14"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$V{CareOf}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="381" y="0" width="174" height="14"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$V{FullDName}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="554" y="0" width="1" height="16"/>
+			</line>
+			<line>
+				<reportElement x="0" y="0" width="1" height="16"/>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="16" splitType="Stretch">
+			<staticText>
+				<reportElement x="363" y="0" width="20" height="13"/>
+				<textElement verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Time]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="113" y="0" width="115" height="13"/>
+				<textElement verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Developed By-www.cursorbd.com]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy h.mm a">
+				<reportElement x="380" y="0" width="70" height="13"/>
+				<textElement verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

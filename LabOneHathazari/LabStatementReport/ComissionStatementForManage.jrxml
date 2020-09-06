@@ -1,0 +1,468 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.100000000000006"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="sql" class="java.lang.String">
+		<defaultValueExpression><![CDATA["select * from TbRefferWiseComissionStatementDetails('2018-10-01','2018-10-09','DC-181')"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="orgName" class="java.lang.String"/>
+	<parameter name="orgAddress" class="java.lang.String"/>
+	<parameter name="orgMobile" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[$P!{sql}]]>
+	</queryString>
+	<field name="RefferName" class="java.lang.String"/>
+	<field name="RefferDegree" class="java.lang.String"/>
+	<field name="LabBill" class="java.lang.String"/>
+	<field name="PatientName" class="java.lang.String"/>
+	<field name="PathologyRate" class="java.math.BigDecimal"/>
+	<field name="PathologyCMDDiscount" class="java.math.BigDecimal"/>
+	<field name="PathologySellDiscount" class="java.math.BigDecimal"/>
+	<field name="PathologyNetDiscount" class="java.math.BigDecimal"/>
+	<field name="PathologyNetAmount" class="java.math.BigDecimal"/>
+	<field name="HormoneRate" class="java.math.BigDecimal"/>
+	<field name="HormoneCMDDiscount" class="java.math.BigDecimal"/>
+	<field name="HormoneSellDiscount" class="java.math.BigDecimal"/>
+	<field name="HormoneNetDiscount" class="java.math.BigDecimal"/>
+	<field name="HormoneNetAmount" class="java.math.BigDecimal"/>
+	<field name="EchoCardRate" class="java.math.BigDecimal"/>
+	<field name="EchoCardCMDDiscount" class="java.math.BigDecimal"/>
+	<field name="EchoCardSellDiscount" class="java.math.BigDecimal"/>
+	<field name="EchoCardNetDiscount" class="java.math.BigDecimal"/>
+	<field name="EchoCardNetAmount" class="java.math.BigDecimal"/>
+	<field name="UltraSonoRate" class="java.math.BigDecimal"/>
+	<field name="UltraSonoCMDDiscount" class="java.math.BigDecimal"/>
+	<field name="UltraSonoSellDiscount" class="java.math.BigDecimal"/>
+	<field name="UltraSonoNetDiscount" class="java.math.BigDecimal"/>
+	<field name="UltraSonoNetAmount" class="java.math.BigDecimal"/>
+	<field name="EnDosRate" class="java.math.BigDecimal"/>
+	<field name="EnDosCMDDiscount" class="java.math.BigDecimal"/>
+	<field name="EnDosSellDiscount" class="java.math.BigDecimal"/>
+	<field name="EnDosNetDiscount" class="java.math.BigDecimal"/>
+	<field name="EnDosNetAmount" class="java.math.BigDecimal"/>
+	<field name="XrayRate" class="java.math.BigDecimal"/>
+	<field name="XrayCMDDiscount" class="java.math.BigDecimal"/>
+	<field name="XraySellDiscount" class="java.math.BigDecimal"/>
+	<field name="XrayNetDiscount" class="java.math.BigDecimal"/>
+	<field name="XrayNetAmount" class="java.math.BigDecimal"/>
+	<field name="ECGRate" class="java.math.BigDecimal"/>
+	<field name="ECGCMDDiscount" class="java.math.BigDecimal"/>
+	<field name="ECGSellDiscount" class="java.math.BigDecimal"/>
+	<field name="ECGNetDiscount" class="java.math.BigDecimal"/>
+	<field name="ECGNetAmount" class="java.math.BigDecimal"/>
+	<field name="HistopathologyRate" class="java.math.BigDecimal"/>
+	<field name="HistopathologyCMDDiscount" class="java.math.BigDecimal"/>
+	<field name="HistopathologySellDiscount" class="java.math.BigDecimal"/>
+	<field name="HistopathologyNetDiscount" class="java.math.BigDecimal"/>
+	<field name="HistopathologyNetAmount" class="java.math.BigDecimal"/>
+	<field name="BloodGroupRate" class="java.math.BigDecimal"/>
+	<field name="BloodGroupCMDDiscount" class="java.math.BigDecimal"/>
+	<field name="BloodGroupSellDiscount" class="java.math.BigDecimal"/>
+	<field name="BloodGroupNetDiscount" class="java.math.BigDecimal"/>
+	<field name="BloodGroupNetAmount" class="java.math.BigDecimal"/>
+	<field name="FNARate" class="java.math.BigDecimal"/>
+	<field name="FNACMDDiscount" class="java.math.BigDecimal"/>
+	<field name="FNASellDiscount" class="java.math.BigDecimal"/>
+	<field name="FNANetDiscount" class="java.math.BigDecimal"/>
+	<field name="FNANetAmount" class="java.math.BigDecimal"/>
+	<field name="PepsSemarRate" class="java.math.BigDecimal"/>
+	<field name="PepsSemarCMDDiscount" class="java.math.BigDecimal"/>
+	<field name="PepsSemarSellDiscount" class="java.math.BigDecimal"/>
+	<field name="PepsSemarNetDiscount" class="java.math.BigDecimal"/>
+	<field name="PepsSemarNetAmount" class="java.math.BigDecimal"/>
+	<field name="OthersRate" class="java.math.BigDecimal"/>
+	<field name="OthersCMDDiscount" class="java.math.BigDecimal"/>
+	<field name="OthersSellDiscount" class="java.math.BigDecimal"/>
+	<field name="OthersNetDiscount" class="java.math.BigDecimal"/>
+	<field name="OthersNetAmount" class="java.math.BigDecimal"/>
+	<field name="ManualDiscount" class="java.math.BigDecimal"/>
+	<field name="DoctorDiscount" class="java.math.BigDecimal"/>
+	<field name="TotalCharge" class="java.math.BigDecimal"/>
+	<field name="Payable" class="java.math.BigDecimal"/>
+	<field name="PerticularCharge" class="java.math.BigDecimal"/>
+	<field name="TotalPaid" class="java.math.BigDecimal"/>
+	<field name="Due" class="java.math.BigDecimal"/>
+	<field name="Date" class="java.lang.String"/>
+	<field name="StartDate" class="java.util.Date"/>
+	<field name="EndDate" class="java.util.Date"/>
+	<variable name="SL" class="java.lang.Number" calculation="Sum">
+		<variableExpression><![CDATA[1]]></variableExpression>
+	</variable>
+	<variable name="payable" class="java.lang.Double">
+		<variableExpression><![CDATA[($F{PathologyNetAmount}+$F{HormoneNetAmount}+$F{EchoCardNetAmount}+$F{UltraSonoNetAmount}+$F{EnDosNetAmount}+$F{XrayNetAmount}+$F{ECGNetAmount}+$F{FNANetAmount}+$F{HistopathologyNetAmount}+$F{BloodGroupNetAmount}+$F{PepsSemarNetAmount}+$F{OthersNetAmount})]]></variableExpression>
+	</variable>
+	<variable name="BillTotal" class="java.lang.Double">
+		<variableExpression><![CDATA[($F{PathologyNetAmount}+$F{HormoneNetAmount}+$F{EchoCardNetAmount}+$F{UltraSonoNetAmount}+$F{EnDosNetAmount}+$F{XrayNetAmount}+$F{ECGNetAmount}+$F{FNANetAmount}+$F{HistopathologyNetAmount}+$F{BloodGroupNetAmount}+$F{PepsSemarNetAmount}+$F{OthersNetAmount})]]></variableExpression>
+	</variable>
+	<variable name="totalCharge" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{TotalCharge}]]></variableExpression>
+	</variable>
+	<variable name="tpayable" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[($F{PathologyRate}*$F{PathologyCMDDiscount}/100)+($F{HormoneRate}*$F{HormoneCMDDiscount}/100)+($F{EchoCardRate}*$F{EchoCardCMDDiscount}/100)+($F{UltraSonoRate}*$F{UltraSonoCMDDiscount}/100)+($F{EnDosRate}*$F{EnDosCMDDiscount}/100)+($F{XrayRate}*$F{XrayCMDDiscount}/100)+($F{ECGRate}*$F{ECGCMDDiscount}/100)+($F{HistopathologyRate}*$F{HistopathologyCMDDiscount}/100)+($F{BloodGroupRate}*$F{BloodGroupCMDDiscount}/100)+($F{FNARate}*$F{FNACMDDiscount}/100)+($F{PepsSemarRate}*$F{PepsSemarCMDDiscount}/100)+($F{OthersRate}*$F{OthersCMDDiscount}/100)]]></variableExpression>
+	</variable>
+	<variable name="tdocdis" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{DoctorDiscount}-($F{ManualDiscount}*2)]]></variableExpression>
+	</variable>
+	<variable name="managedis" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{ManualDiscount}]]></variableExpression>
+	</variable>
+	<variable name="tBillTotal" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[($F{PathologyNetAmount}+$F{HormoneNetAmount}+$F{EchoCardNetAmount}+$F{UltraSonoNetAmount}+$F{EnDosNetAmount}+$F{XrayNetAmount}+$F{ECGNetAmount}+$F{FNANetAmount}+$F{HistopathologyNetAmount}+$F{BloodGroupNetAmount}+$F{PepsSemarNetAmount}+$F{OthersNetAmount})-$F{ManualDiscount}]]></variableExpression>
+	</variable>
+	<variable name="totalCharge_1" class="java.lang.Double" resetType="Page" calculation="Sum">
+		<variableExpression><![CDATA[$F{PathologyRate}+$F{HormoneRate}+$F{EchoCardRate}+$F{UltraSonoRate}+$F{EnDosRate}+$F{XrayRate}+$F{ECGRate}+$F{HistopathologyRate}+$F{BloodGroupRate}+$F{FNARate}+$F{PepsSemarRate}+$F{OthersRate}]]></variableExpression>
+	</variable>
+	<variable name="tdocdis_1" class="java.lang.Double" resetType="Group" resetGroup="DegGp" calculation="Sum">
+		<variableExpression><![CDATA[$F{DoctorDiscount}-($F{ManualDiscount}*2)]]></variableExpression>
+	</variable>
+	<variable name="managedis_1" class="java.lang.Double" resetType="Group" resetGroup="DegGp" calculation="Sum">
+		<variableExpression><![CDATA[$F{ManualDiscount}]]></variableExpression>
+	</variable>
+	<variable name="tBillTotal_1" class="java.lang.Double" resetType="Group" resetGroup="DegGp" calculation="Sum">
+		<variableExpression><![CDATA[($F{PathologyNetAmount}+$F{HormoneNetAmount}+$F{EchoCardNetAmount}+$F{UltraSonoNetAmount}+$F{EnDosNetAmount}+$F{XrayNetAmount}+$F{ECGNetAmount}+$F{FNANetAmount}+$F{HistopathologyNetAmount}+$F{BloodGroupNetAmount}+$F{PepsSemarNetAmount}+$F{OthersNetAmount})]]></variableExpression>
+	</variable>
+	<variable name="tpayable_1" class="java.lang.Double" resetType="Group" resetGroup="DegGp" calculation="Sum">
+		<variableExpression><![CDATA[($F{PathologyNetAmount}+$F{HormoneNetAmount}+$F{EchoCardNetAmount}+$F{UltraSonoNetAmount}+$F{EnDosNetAmount}+$F{XrayNetAmount}+$F{ECGNetAmount}+$F{FNANetAmount}+$F{HistopathologyNetAmount}+$F{BloodGroupNetAmount}+$F{PepsSemarNetAmount}+$F{OthersNetAmount})]]></variableExpression>
+	</variable>
+	<variable name="netAmount" class="java.math.BigDecimal">
+		<variableExpression><![CDATA[$F{PathologyRate}+$F{HormoneRate}+$F{EchoCardRate}+$F{UltraSonoRate}+$F{EnDosRate}+$F{XrayRate}+$F{ECGRate}+$F{HistopathologyRate}+$F{BloodGroupRate}+$F{FNARate}+$F{PepsSemarRate}+$F{OthersRate}]]></variableExpression>
+	</variable>
+	<group name="DegGp" isStartNewPage="true">
+		<groupExpression><![CDATA[$F{RefferName}]]></groupExpression>
+		<groupHeader>
+			<band height="120">
+				<textField isBlankWhenNull="true">
+					<reportElement x="0" y="71" width="552" height="14"/>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[($F{RefferName}==null?"":$F{RefferName})+" "+($F{RefferDegree}==null?"":$F{RefferDegree})]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="2" y="41" width="550" height="13"/>
+					<textElement textAlignment="Center" markup="none">
+						<font size="8" isBold="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{orgMobile}]]></textFieldExpression>
+				</textField>
+				<image scaleImage="FillFrame">
+					<reportElement x="44" y="10" width="72" height="55"/>
+					<imageExpression class="java.lang.String"><![CDATA["src\\loginlogo.jpg"]]></imageExpression>
+				</image>
+				<staticText>
+					<reportElement x="203" y="53" width="148" height="14"/>
+					<textElement textAlignment="Center">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Referral Comission Statement ]]></text>
+				</staticText>
+				<textField isBlankWhenNull="true">
+					<reportElement x="2" y="30" width="550" height="13"/>
+					<textElement textAlignment="Center" markup="none">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{orgAddress}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="2" y="11" width="550" height="20"/>
+					<textElement textAlignment="Center" markup="none">
+						<font fontName="Arial" size="16" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{orgName}]]></textFieldExpression>
+				</textField>
+				<textField pattern="dd/MM/yyyy">
+					<reportElement x="452" y="55" width="51" height="14"/>
+					<textElement textAlignment="Right">
+						<font size="9" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.util.Date"><![CDATA[$F{StartDate}]]></textFieldExpression>
+				</textField>
+				<textField pattern="dd/MM/yyyy">
+					<reportElement x="506" y="55" width="45" height="14"/>
+					<textElement textAlignment="Right">
+						<font size="9" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.util.Date"><![CDATA[$F{EndDate}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="505" y="54" width="5" height="14"/>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[-]]></text>
+				</staticText>
+				<line>
+					<reportElement x="0" y="97" width="555" height="1"/>
+				</line>
+				<line>
+					<reportElement x="0" y="119" width="555" height="1"/>
+				</line>
+				<line>
+					<reportElement x="0" y="98" width="1" height="21"/>
+				</line>
+				<line>
+					<reportElement x="554" y="98" width="1" height="21"/>
+				</line>
+				<line>
+					<reportElement x="493" y="97" width="1" height="22"/>
+				</line>
+				<line>
+					<reportElement x="432" y="98" width="1" height="21"/>
+				</line>
+				<line>
+					<reportElement x="371" y="97" width="1" height="22"/>
+				</line>
+				<line>
+					<reportElement x="310" y="98" width="1" height="21"/>
+				</line>
+				<line>
+					<reportElement x="249" y="98" width="1" height="21"/>
+				</line>
+				<line>
+					<reportElement x="126" y="97" width="1" height="22"/>
+				</line>
+				<line>
+					<reportElement x="28" y="97" width="1" height="22"/>
+				</line>
+				<line>
+					<reportElement x="87" y="97" width="1" height="22"/>
+				</line>
+				<staticText>
+					<reportElement x="1" y="98" width="27" height="21"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<text><![CDATA[SL#]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="29" y="98" width="58" height="21"/>
+					<box leftPadding="2"/>
+					<textElement verticalAlignment="Middle"/>
+					<text><![CDATA[Date]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="88" y="98" width="38" height="21"/>
+					<box leftPadding="2"/>
+					<textElement verticalAlignment="Middle"/>
+					<text><![CDATA[ID]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="127" y="98" width="122" height="21"/>
+					<box leftPadding="2"/>
+					<textElement verticalAlignment="Middle"/>
+					<text><![CDATA[PATIENT NAME]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="250" y="98" width="60" height="21"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8" isBold="false"/>
+					</textElement>
+					<text><![CDATA[TOTAL CHARGE]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="311" y="98" width="60" height="21"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8" isBold="false"/>
+					</textElement>
+					<text><![CDATA[PAYABLE]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="372" y="98" width="60" height="21"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8" isBold="false"/>
+					</textElement>
+					<text><![CDATA[DOCTOR DISCOUNT]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="433" y="98" width="60" height="21"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8" isBold="false"/>
+					</textElement>
+					<text><![CDATA[MANAGEMENT DISCOUNT]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="494" y="98" width="60" height="21"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8" isBold="false"/>
+					</textElement>
+					<text><![CDATA[NET PAYABLE]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="24">
+				<textField pattern="#,##0.00">
+					<reportElement x="433" y="2" width="61" height="14"/>
+					<box rightPadding="2"/>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression class="java.lang.Double"><![CDATA[$V{managedis_1}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00">
+					<reportElement x="310" y="2" width="61" height="14"/>
+					<box rightPadding="2"/>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression class="java.lang.Double"><![CDATA[$V{tpayable_1}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00">
+					<reportElement x="494" y="2" width="59" height="14"/>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression class="java.lang.Double"><![CDATA[$V{tBillTotal_1}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00">
+					<reportElement x="372" y="2" width="60" height="14"/>
+					<box rightPadding="2"/>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression class="java.lang.Double"><![CDATA[$V{tdocdis_1}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00">
+					<reportElement x="250" y="2" width="60" height="14"/>
+					<box rightPadding="2"/>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression class="java.lang.Double"><![CDATA[$V{totalCharge_1}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="2" y="19" width="553" height="1"/>
+					<graphicElement>
+						<pen lineWidth="4.0" lineStyle="Double"/>
+					</graphicElement>
+				</line>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="15" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="-1" width="555" height="1"/>
+			</line>
+			<line>
+				<reportElement x="0" y="14" width="555" height="1"/>
+			</line>
+			<line>
+				<reportElement x="0" y="0" width="1" height="14"/>
+			</line>
+			<line>
+				<reportElement x="554" y="0" width="1" height="14"/>
+			</line>
+			<line>
+				<reportElement x="493" y="-1" width="1" height="16"/>
+			</line>
+			<line>
+				<reportElement x="432" y="0" width="1" height="14"/>
+			</line>
+			<line>
+				<reportElement x="371" y="-1" width="1" height="16"/>
+			</line>
+			<line>
+				<reportElement x="310" y="0" width="1" height="14"/>
+			</line>
+			<line>
+				<reportElement x="249" y="0" width="1" height="14"/>
+			</line>
+			<line>
+				<reportElement x="126" y="-1" width="1" height="15"/>
+			</line>
+			<line>
+				<reportElement x="28" y="-1" width="1" height="16"/>
+			</line>
+			<line>
+				<reportElement x="87" y="-1" width="1" height="16"/>
+			</line>
+			<textField pattern="#,##0">
+				<reportElement x="1" y="0" width="27" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.Number"><![CDATA[$V{SL}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="29" y="0" width="58" height="14"/>
+				<box leftPadding="2"/>
+				<textElement verticalAlignment="Middle">
+					<font isStrikeThrough="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="88" y="1" width="38" height="14"/>
+				<box leftPadding="2"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{LabBill}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="127" y="1" width="122" height="14"/>
+				<box leftPadding="2"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{PatientName}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="251" y="0" width="59" height="14"/>
+				<box rightPadding="2"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{netAmount}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="311" y="0" width="60" height="14"/>
+				<box rightPadding="2"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{payable}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="372" y="0" width="60" height="14"/>
+				<box rightPadding="2"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{DoctorDiscount}-($F{ManualDiscount}*2)]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="433" y="0" width="60" height="14"/>
+				<box rightPadding="2"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{ManualDiscount}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="495" y="1" width="58" height="14"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{BillTotal}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="40" splitType="Stretch">
+			<staticText>
+				<reportElement x="55" y="10" width="179" height="13"/>
+				<textElement verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Developed By-www.cursorbd.com]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy h.mm a">
+				<reportElement x="444" y="10" width="70" height="13"/>
+				<textElement verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="427" y="10" width="20" height="13"/>
+				<textElement verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Time]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

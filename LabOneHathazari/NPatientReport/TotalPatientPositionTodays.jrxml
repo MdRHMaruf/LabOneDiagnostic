@@ -1,0 +1,619 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="TotalPatientPositionTodays" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.4641000000000022"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="210"/>
+	<parameter name="sql" class="java.lang.String">
+		<defaultValueExpression><![CDATA["select *from TbCurrentPatientPosition('2020-02-05','2020-02-06','2020-02-07') order by DatePosition,SeatType,Isgym"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[$P!{sql}]]>
+	</queryString>
+	<field name="AdmissionDate" class="java.util.Date"/>
+	<field name="PatientName" class="java.lang.String"/>
+	<field name="RegNoYear" class="java.lang.String"/>
+	<field name="SeatName" class="java.lang.String"/>
+	<field name="SeatType" class="java.lang.String"/>
+	<field name="FatherName" class="java.lang.String"/>
+	<field name="HusbanName" class="java.lang.String"/>
+	<field name="IsGym" class="java.lang.Integer"/>
+	<field name="RefferDoctor" class="java.lang.String"/>
+	<field name="RefferDegree" class="java.lang.String"/>
+	<field name="ConsultantDoctor" class="java.lang.String"/>
+	<field name="ConsultantDegree" class="java.lang.String"/>
+	<field name="DatePosition" class="java.lang.String"/>
+	<field name="CurrentDate" class="java.util.Date"/>
+	<variable name="CareOf" class="java.lang.String">
+		<variableExpression><![CDATA[( $F{HusbanName}.equals("") ? $F{FatherName} : $F{HusbanName} )]]></variableExpression>
+	</variable>
+	<variable name="FullDName" class="java.lang.String">
+		<variableExpression><![CDATA[$F{RefferDoctor}==null?"":$F{RefferDoctor}+" "+($F{RefferDegree}==null?"":$F{RefferDegree})]]></variableExpression>
+	</variable>
+	<variable name="sl" class="java.lang.Number" resetType="Group" resetGroup="Gr" calculation="Sum">
+		<variableExpression><![CDATA[1]]></variableExpression>
+	</variable>
+	<variable name="tSl" class="java.lang.Number" resetType="Group" resetGroup="SeatGroup" calculation="Sum">
+		<variableExpression><![CDATA[1]]></variableExpression>
+	</variable>
+	<variable name="ttSl" class="java.lang.Number" incrementType="Group" incrementGroup="Gr" calculation="Sum">
+		<variableExpression><![CDATA[($F{DatePosition}.equals( "Patients Released Todays" )?0:$V{sl})]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="tCabin" class="java.lang.Number" calculation="Sum">
+		<variableExpression><![CDATA[$F{SeatType}.equals("Cabin")?$F{DatePosition}.equals("Patients Released Todays")?0:1:0]]></variableExpression>
+	</variable>
+	<variable name="tICU" class="java.lang.Number" calculation="Sum">
+		<variableExpression><![CDATA[$F{SeatType}.equals("ICU")?$F{DatePosition}.equals("Patients Released Todays")?0:1:0]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="tCCU" class="java.lang.Number" calculation="Sum">
+		<variableExpression><![CDATA[$F{SeatType}.equals("CCU")?$F{DatePosition}.equals("Patients Released Todays")?0:1:0]]></variableExpression>
+	</variable>
+	<variable name="tHDU" class="java.lang.Number" calculation="Sum">
+		<variableExpression><![CDATA[$F{SeatType}.equals("HDU")?$F{DatePosition}.equals("Patients Released Todays")?0:1:0]]></variableExpression>
+	</variable>
+	<variable name="tPCCU" class="java.lang.Number" calculation="Sum">
+		<variableExpression><![CDATA[$F{SeatType}.equals("PCCU")?$F{DatePosition}.equals("Patients Released Todays")?0:1:0]]></variableExpression>
+	</variable>
+	<variable name="tSD" class="java.lang.Number" calculation="Sum">
+		<variableExpression><![CDATA[$F{SeatType}.equals("SD")?$F{DatePosition}.equals("Patients Released Todays")?0:1:0]]></variableExpression>
+	</variable>
+	<variable name="tOPD" class="java.lang.Number" calculation="Sum">
+		<variableExpression><![CDATA[$F{SeatType}.equals("OPD")?$F{DatePosition}.equals("Patients Released Todays")?0:1:0]]></variableExpression>
+	</variable>
+	<variable name="tWard" class="java.lang.Number" calculation="Sum">
+		<variableExpression><![CDATA[$F{SeatType}.equals("Ward")?$F{DatePosition}.equals("Patients Released Todays")?0:1:0]]></variableExpression>
+	</variable>
+	<variable name="tEC" class="java.lang.Number" calculation="Sum">
+		<variableExpression><![CDATA[$F{SeatType}.equals("EC")?$F{DatePosition}.equals("Patients Released Todays")?0:1:0]]></variableExpression>
+	</variable>
+	<variable name="variable1" class="java.lang.String"/>
+	<group name="Gr">
+		<groupExpression><![CDATA[$F{DatePosition}]]></groupExpression>
+		<groupHeader>
+			<band height="20">
+				<rectangle>
+					<reportElement x="2" y="1" width="150" height="17" backcolor="#666666"/>
+					<graphicElement>
+						<pen lineWidth="0.0"/>
+					</graphicElement>
+				</rectangle>
+				<textField>
+					<reportElement mode="Opaque" x="3" y="2" width="148" height="14"/>
+					<textElement>
+						<font isBold="true" isItalic="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{DatePosition}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="0" y="0" width="1" height="20"/>
+				</line>
+				<line>
+					<reportElement x="554" y="0" width="1" height="20"/>
+				</line>
+				<line>
+					<reportElement x="0" y="0" width="555" height="1"/>
+				</line>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="25">
+				<rectangle>
+					<reportElement x="4" y="1" width="94" height="13" forecolor="#CCCCCC"/>
+				</rectangle>
+				<staticText>
+					<reportElement x="4" y="1" width="94" height="13"/>
+					<textElement>
+						<font size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Total # Of Patients :]]></text>
+				</staticText>
+				<rectangle>
+					<reportElement x="165" y="1" width="35" height="13" forecolor="#CCCCCC"/>
+				</rectangle>
+				<textField pattern="#,##0">
+					<reportElement x="166" y="1" width="34" height="13"/>
+					<textElement textAlignment="Center">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.Number"><![CDATA[$V{sl}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="0" y="18" width="555" height="1"/>
+					<graphicElement>
+						<pen lineStyle="Double"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="0" y="0" width="1" height="19"/>
+				</line>
+				<line>
+					<reportElement x="554" y="0" width="1" height="19"/>
+				</line>
+			</band>
+		</groupFooter>
+	</group>
+	<group name="SeatGroup">
+		<groupExpression><![CDATA[$F{SeatType}]]></groupExpression>
+		<groupHeader>
+			<band/>
+		</groupHeader>
+		<groupFooter>
+			<band height="18">
+				<rectangle>
+					<reportElement x="165" y="3" width="35" height="13" forecolor="#CCCCCC"/>
+				</rectangle>
+				<textField pattern="#,##0">
+					<reportElement x="166" y="3" width="34" height="13"/>
+					<textElement textAlignment="Center">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.Number"><![CDATA[$V{tSl}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="0" y="0" width="1" height="18"/>
+				</line>
+				<line>
+					<reportElement x="554" y="0" width="1" height="18"/>
+				</line>
+			</band>
+		</groupFooter>
+	</group>
+	<group name="Gyn">
+		<groupExpression><![CDATA[$F{IsGym}]]></groupExpression>
+		<groupHeader>
+			<band height="18">
+				<rectangle>
+					<reportElement x="2" y="0" width="63" height="18" backcolor="#666666"/>
+					<graphicElement>
+						<pen lineWidth="0.0"/>
+					</graphicElement>
+				</rectangle>
+				<textField>
+					<reportElement mode="Opaque" x="3" y="1" width="60" height="14"/>
+					<textElement>
+						<font isBold="true" isItalic="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{IsGym}==0?$F{SeatType}:"GYN"]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="0" y="0" width="1" height="18"/>
+				</line>
+				<line>
+					<reportElement x="554" y="0" width="1" height="18"/>
+				</line>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="2" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="70" splitType="Stretch">
+			<image>
+				<reportElement x="35" y="14" width="50" height="50"/>
+				<imageExpression class="java.lang.String"><![CDATA["src\\rptlogo.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="199" y="50" width="156" height="14"/>
+				<textElement>
+					<font isBold="true" isItalic="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Total Patient Position Today]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="363" y="50" width="105" height="14"/>
+				<textElement>
+					<font isItalic="true" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{CurrentDate}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="2" y="19" width="553" height="13"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[445/466 Katalgonj,Chawkbazar]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="32" width="552" height="13"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[2555101-5]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="6" width="552" height="14"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SURGISCOPE HOSPITAL LTD. (Unit-2)]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="17" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="0" width="555" height="1"/>
+			</line>
+			<line>
+				<reportElement x="0" y="16" width="555" height="1"/>
+			</line>
+			<staticText>
+				<reportElement x="3" y="1" width="49" height="15"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="52" y="1" width="90" height="15"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Patient Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="143" y="1" width="58" height="15"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Reg.No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="203" y="1" width="52" height="15"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Seat]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="256" y="1" width="95" height="15"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Guardian]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="353" y="1" width="100" height="15"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Consultant ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="455" y="1" width="100" height="15"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Reffer ]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="0" width="1" height="17"/>
+			</line>
+			<line>
+				<reportElement x="554" y="0" width="1" height="17"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="-1" width="555" height="1"/>
+				<graphicElement>
+					<pen lineColor="#CCCCCC"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="0" y="15" width="555" height="1"/>
+				<graphicElement>
+					<pen lineColor="#CCCCCC"/>
+				</graphicElement>
+			</line>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="2" y="0" width="50" height="14"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{AdmissionDate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="52" y="0" width="90" height="16"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{PatientName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="143" y="0" width="58" height="14"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{RegNoYear}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="203" y="0" width="52" height="14"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{SeatName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="256" y="0" width="95" height="14"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$V{CareOf}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="352" y="0" width="100" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{ConsultantDoctor}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="457" y="0" width="100" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{RefferDoctor}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="0" width="1" height="16"/>
+			</line>
+			<line>
+				<reportElement x="554" y="0" width="1" height="16"/>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="16" splitType="Stretch">
+			<staticText>
+				<reportElement x="363" y="0" width="20" height="13"/>
+				<textElement verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Time]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="113" y="0" width="115" height="13"/>
+				<textElement verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Developed By-www.cursorbd.com]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy h.mm a">
+				<reportElement x="380" y="0" width="70" height="13"/>
+				<textElement verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="93" splitType="Stretch">
+			<rectangle>
+				<reportElement mode="Transparent" x="4" y="8" width="139" height="15" forecolor="#CCCCCC" backcolor="#CCCCCC"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="4" y="8" width="138" height="14"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Admitted Patient]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement mode="Transparent" x="165" y="8" width="38" height="15" forecolor="#CCCCCC" backcolor="#CCCCCC"/>
+			</rectangle>
+			<textField pattern="#,##0">
+				<reportElement x="166" y="8" width="37" height="14"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Number"><![CDATA[$V{ttSl}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="355" y="8" width="55" height="14"/>
+				<box leftPadding="2"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cabin]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement mode="Transparent" x="355" y="8" width="55" height="15" forecolor="#CCCCCC" backcolor="#CCCCCC"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="355" y="25" width="55" height="15" forecolor="#CCCCCC" backcolor="#CCCCCC"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="355" y="25" width="55" height="14"/>
+				<box leftPadding="2"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ICU]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement mode="Transparent" x="355" y="43" width="55" height="15" forecolor="#CCCCCC" backcolor="#CCCCCC"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="355" y="43" width="55" height="14"/>
+				<box leftPadding="2"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[HDU]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement mode="Transparent" x="355" y="60" width="55" height="15" forecolor="#CCCCCC" backcolor="#CCCCCC"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="355" y="60" width="55" height="14"/>
+				<box leftPadding="2"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CCU]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="453" y="8" width="55" height="14"/>
+				<box leftPadding="2"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PCCU]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement mode="Transparent" x="453" y="8" width="55" height="15" forecolor="#CCCCCC" backcolor="#CCCCCC"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="453" y="25" width="55" height="14"/>
+				<box leftPadding="2"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SD]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement mode="Transparent" x="453" y="25" width="55" height="15" forecolor="#CCCCCC" backcolor="#CCCCCC"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="453" y="42" width="55" height="15" forecolor="#CCCCCC" backcolor="#CCCCCC"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="453" y="42" width="55" height="14"/>
+				<box leftPadding="2"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[OPD]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement mode="Transparent" x="453" y="59" width="55" height="15" forecolor="#CCCCCC" backcolor="#CCCCCC"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="453" y="59" width="55" height="14"/>
+				<box leftPadding="2"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ward]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="453" y="76" width="55" height="14"/>
+				<box leftPadding="2"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[EC]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement mode="Transparent" x="453" y="76" width="55" height="15" forecolor="#CCCCCC" backcolor="#CCCCCC"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="412" y="8" width="35" height="15" forecolor="#CCCCCC" backcolor="#CCCCCC"/>
+			</rectangle>
+			<textField pattern="#,##0">
+				<reportElement x="412" y="8" width="34" height="14"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Number"><![CDATA[$V{tCabin}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement mode="Transparent" x="412" y="25" width="35" height="15" forecolor="#CCCCCC" backcolor="#CCCCCC"/>
+			</rectangle>
+			<textField pattern="#,##0">
+				<reportElement x="412" y="25" width="34" height="14"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Number"><![CDATA[$V{tICU}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="412" y="43" width="34" height="14"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Number"><![CDATA[$V{tHDU}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement mode="Transparent" x="412" y="43" width="35" height="15" forecolor="#CCCCCC" backcolor="#CCCCCC"/>
+			</rectangle>
+			<textField pattern="#,##0">
+				<reportElement x="412" y="60" width="34" height="14"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Number"><![CDATA[$V{tCCU}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement mode="Transparent" x="412" y="60" width="35" height="15" forecolor="#CCCCCC" backcolor="#CCCCCC"/>
+			</rectangle>
+			<textField pattern="#,##0">
+				<reportElement x="510" y="8" width="34" height="14"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Number"><![CDATA[$V{tPCCU}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement mode="Transparent" x="510" y="8" width="35" height="15" forecolor="#CCCCCC" backcolor="#CCCCCC"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="510" y="25" width="35" height="15" forecolor="#CCCCCC" backcolor="#CCCCCC"/>
+			</rectangle>
+			<textField pattern="#,##0">
+				<reportElement x="510" y="25" width="34" height="14"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Number"><![CDATA[$V{tSD}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="510" y="42" width="34" height="14"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Number"><![CDATA[$V{tOPD}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement mode="Transparent" x="510" y="42" width="35" height="15" forecolor="#CCCCCC" backcolor="#CCCCCC"/>
+			</rectangle>
+			<textField pattern="#,##0">
+				<reportElement x="510" y="59" width="34" height="14"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Number"><![CDATA[$V{tWard}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement mode="Transparent" x="510" y="59" width="35" height="15" forecolor="#CCCCCC" backcolor="#CCCCCC"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="510" y="76" width="35" height="15" forecolor="#CCCCCC" backcolor="#CCCCCC"/>
+			</rectangle>
+			<textField pattern="#,##0">
+				<reportElement x="510" y="76" width="34" height="14"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Number"><![CDATA[$V{tEC}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="0" width="555" height="1"/>
+				<graphicElement>
+					<pen lineWidth="2.0" lineStyle="Double"/>
+				</graphicElement>
+			</line>
+		</band>
+	</summary>
+</jasperReport>
