@@ -477,17 +477,10 @@
 	<summary>
 		<band height="29" splitType="Stretch">
 			<printWhenExpression><![CDATA[$F{Comment}.length()>0 ? true:false]]></printWhenExpression>
-			<staticText>
-				<reportElement x="10" y="0" width="67" height="15"/>
-				<textElement>
-					<font size="10" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Comment : ]]></text>
-			</staticText>
 			<textField>
-				<reportElement x="72" y="0" width="466" height="15"/>
+				<reportElement x="8" y="0" width="530" height="15"/>
 				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{Comment}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Comment}.replace( '#', '\n' ).trim()]]></textFieldExpression>
 			</textField>
 		</band>
 	</summary>

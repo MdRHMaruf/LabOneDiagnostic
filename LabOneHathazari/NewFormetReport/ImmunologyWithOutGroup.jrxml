@@ -479,7 +479,7 @@
 	</pageFooter>
 	<summary>
 		<band height="22" splitType="Stretch">
-			<printWhenExpression><![CDATA[$F{Comment}.length()>0 ? true:false]]></printWhenExpression>
+			<printWhenExpression><![CDATA[$F{Note}.length()>0 ? true:false]]></printWhenExpression>
 			<textField>
 				<reportElement x="8" y="0" width="538" height="15">
 					<printWhenExpression><![CDATA[$F{Comment}.length()>0 ? true:false]]></printWhenExpression>
